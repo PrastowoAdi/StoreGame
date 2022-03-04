@@ -1,7 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-interface InputProps {
+export interface InputProps {
     label: string;
 }
 export default function Input(props:InputProps) {
