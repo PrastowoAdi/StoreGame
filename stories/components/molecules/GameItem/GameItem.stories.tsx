@@ -13,8 +13,8 @@ const Template = (args: GameItemProps) => <GameItem {...args} />;
 
 export const Default = Template.bind({});
 
-Default.args = {
-  title: "Super Merc",
-  category: "Mobile",
-  thumbnail: "/img/Thumbnail-1.png",
-};
+// Default.args = {
+//   title: "Super Merc",
+//   category: "Mobile",
+//   thumbnail: "/img/Thumbnail-1.png",
+// };

@@ -13,6 +13,6 @@ const Template = (args: InputProps) => <Input {...args} />;
 
 export const Default = Template.bind({});
 
-Default.args = {
-  label: "Nama Lengkap",
-};
+// Default.args = {
+//   label: "Nama Lengkap",
+// };
