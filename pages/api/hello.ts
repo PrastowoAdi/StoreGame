@@ -1,3 +1,6 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable semi */
+/* eslint-disable quotes */
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 

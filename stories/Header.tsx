@@ -1,7 +1,12 @@
-import React from 'react';
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable react/require-default-props */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
+import React from "react";
 
-import { Button } from './Button';
-import './header.css';
+import { Button } from "./Button";
+import "./header.css";
 
 type User = {
   name: string;
@@ -14,7 +19,9 @@ interface HeaderProps {
   onCreateAccount: () => void;
 }
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
+export const Header = ({
+  user, onLogin, onLogout, onCreateAccount,
+}: HeaderProps) => (
   <header>
     <div className="wrapper">
       <div>
@@ -40,7 +47,10 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
         {user ? (
           <>
             <span className="welcome">
-              Welcome, <b>{user.name}</b>!
+              Welcome,
+              {" "}
+              <b>{user.name}</b>
+              !
             </span>
             <Button size="small" onClick={onLogout} label="Log out" />
           </>
