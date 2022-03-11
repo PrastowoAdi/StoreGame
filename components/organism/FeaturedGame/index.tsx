@@ -2,17 +2,21 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import React, { useCallback, useEffect, useState } from "react";
+import { getFeaturedGame } from "../../../services/player";
 import GameItem from "../../molecules/GameItem";
 
 export default function FeaturedGame() {
   const [gameList, setGameList] = useState([]);
 
-  useEffect(async() => {
-    const response = await axios.get("https://mernstack-storegg.herokuapp.com/api/v1/players/landingpage");
-    console.log("data", response.data);
-    setGameList(response.data.data);
+  const getFeatureGameList = useCallback(async () => {
+    const data = await getFeaturedGame();
+    setGameList(data);
+  }, [getFeaturedGame]);
+
+  useEffect(() => {
+    getFeatureGameList();
   }, []);
 
   return (
