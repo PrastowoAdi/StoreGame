@@ -4,6 +4,7 @@
 /* eslint-disable import/extensions */
 
 import React, { useCallback, useEffect, useState } from "react";
+import { GameItemTypes } from "../../../services/data-types";
 import { getFeaturedGame } from "../../../services/player";
 import GameItem from "../../molecules/GameItem";
 
@@ -19,6 +20,7 @@ export default function FeaturedGame() {
     getFeatureGameList();
   }, []);
 
+  const API_IMG = process.env.NEXT_PUBLIC_IMG;
   return (
     <section className="featured-game pt-50 pb-50">
       <div className="container-fluid">
@@ -33,8 +35,13 @@ export default function FeaturedGame() {
           data-aos="fade-up"
         >
           {
-            gameList.map((item) => (
-              <GameItem key={item._id} title={item.name} category={item.category.name} thumbnail={`https://mernstack-storegg.herokuapp.com/uploads/${item.thumbnail}`} />
+            gameList.map((item: GameItemTypes) => (
+              <GameItem
+                key={item._id}
+                title={item.name}
+                category={item.category.name}
+                thumbnail={`${API_IMG}/${item.thumbnail}`}
+              />
             ))
           }
         </div>
