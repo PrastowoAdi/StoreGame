@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -6,7 +7,8 @@ import Link from "next/link";
 import NominalItem from "./NominalItem";
 import PaymentItem from "./PaymentItem";
 
-export default function TopUpForm() {
+export default function TopUpForm(props) {
+  const { nominals, payments } = props;
   return (
     <form action="./checkout.html" method="POST">
       <div className="pt-md-50 pt-30">
@@ -28,9 +30,15 @@ export default function TopUpForm() {
       <div className="pt-md-50 pb-md-50 pt-30 pb-20">
         <p className="text-lg fw-medium color-palette-1 mb-md-10 mb-0">Nominal Top Up</p>
         <div className="row justify-content-between">
-          <NominalItem _id="12934" coinQuantity={12} coinName="Gold" price={120000} />
-          <NominalItem _id="12324" coinQuantity={12} coinName="Gold" price={120000} />
-          <NominalItem _id="12634" coinQuantity={12} coinName="Gold" price={120000} />
+          {nominals.map((nominal) => (
+            <NominalItem
+              key={nominal._id}
+              _id={nominal._id}
+              coinQuantity={nominal.coinQuantity}
+              coinName={nominal.coinName}
+              price={nominal.price}
+            />
+          ))}
           <div className="col-lg-4 col-sm-6">
             {/* <!-- Blank --> */}
           </div>
@@ -40,8 +48,20 @@ export default function TopUpForm() {
         <p className="text-lg fw-medium color-palette-1 mb-md-10 mb-0">Payment Method</p>
         <fieldset id="paymentMethod">
           <div className="row justify-content-between">
-            <PaymentItem bankID="12324" type="Transfer" name="BCA" />
-            <PaymentItem bankID="12334" type="Transfer" name="BCA" />
+            {/* <PaymentItem
+              bankID="sada"
+              type="trans"
+              name="bca"
+            /> */}
+            {payments.map((payment) => payment.banks.map((bank) => (
+              <PaymentItem
+                key={payment._id}
+                bankID={bank._ID}
+                type={payment.type}
+                name={bank.bankName}
+              />
+            )))}
+
             <div className="col-lg-4 col-sm-6">
               {/* <!-- Blank --> */}
             </div>
