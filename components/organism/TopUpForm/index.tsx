@@ -4,10 +4,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import Link from "next/link";
+import { NominalTypes, PaymentTypes } from "../../../services/data-types";
 import NominalItem from "./NominalItem";
 import PaymentItem from "./PaymentItem";
 
-export default function TopUpForm(props) {
+interface TopUpFromProps {
+  nominals: NominalTypes[];
+  payments: PaymentTypes[];
+}
+export default function TopUpForm(props: TopUpFromProps) {
   const { nominals, payments } = props;
   return (
     <form action="./checkout.html" method="POST">
@@ -48,15 +53,11 @@ export default function TopUpForm(props) {
         <p className="text-lg fw-medium color-palette-1 mb-md-10 mb-0">Payment Method</p>
         <fieldset id="paymentMethod">
           <div className="row justify-content-between">
-            {/* <PaymentItem
-              bankID="sada"
-              type="trans"
-              name="bca"
-            /> */}
+
             {payments.map((payment) => payment.banks.map((bank) => (
               <PaymentItem
                 key={payment._id}
-                bankID={bank._ID}
+                bankID={bank._id}
                 type={payment.type}
                 name={bank.bankName}
               />
