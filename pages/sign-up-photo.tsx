@@ -4,7 +4,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { setSignUp } from "../services/auth";
 import { getGameCategory } from "../services/player";
 
@@ -17,6 +22,7 @@ export default function SignUpPhoto() {
     name: "",
     email: "",
   });
+  const router = useRouter();
 
   const getGameCategoryAPI = useCallback(async () => {
     const data = await getGameCategory();
@@ -49,7 +55,13 @@ export default function SignUpPhoto() {
     data.append("favorite", favorite);
 
     const result = await setSignUp(data);
-    console.log("result: ", result);
+    if (result?.error === 1) {
+      toast.error(result.message);
+    } else {
+      toast.success("Register Berhasil");
+      router.push("/sign-up-success");
+      localStorage.removeItem("use-form");
+    }
   };
   return (
     <section className="sign-up-photo mx-auto pt-lg-227 pb-lg-227 pt-130 pb-50">
@@ -123,6 +135,7 @@ export default function SignUpPhoto() {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </section>
   );
 }
