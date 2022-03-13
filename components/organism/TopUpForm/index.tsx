@@ -3,11 +3,9 @@
 /* eslint-disable import/extensions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { BanksTypes, NominalTypes, PaymentTypes } from "../../../services/data-types";
 import NominalItem from "./NominalItem";
 import PaymentItem from "./PaymentItem";
@@ -136,7 +134,6 @@ export default function TopUpForm(props: TopUpFromProps) {
           Continue
         </button>
       </div>
-      <ToastContainer />
     </form>
   );
 }
