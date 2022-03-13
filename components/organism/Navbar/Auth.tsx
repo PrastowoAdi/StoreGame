@@ -14,6 +14,7 @@ export default function Auth() {
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({
     avatar: "",
+    name: "",
   });
   const router = useRouter();
 
@@ -23,8 +24,7 @@ export default function Auth() {
       const jwtToken = atob(token);
       const payload: JwtPayloadTypes = jwtDecode(jwtToken);
       const userFromPayload: UserTypes = payload.player;
-      const IMG = process.env.NEXT_PUBLIC_IMG;
-      user.avatar = `${IMG}/${user.avatar}`;
+
       setIsLogin(true);
 
       setUser(userFromPayload);
@@ -57,6 +57,7 @@ export default function Auth() {
               height="40"
               alt=""
             />
+            {/* {user.name} */}
           </a>
 
           <ul className="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
@@ -79,7 +80,7 @@ export default function Auth() {
     );
   }
   return (
-    <li className="nav-item my-auto" onClick={onLogout}>
+    <li className="nav-item my-auto">
       <Link href="/sign-in">
         <a
           className="btn btn-sign-in d-flex justify-content-center ms-lg-2 rounded-pill"
