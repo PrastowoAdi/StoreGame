@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // import Link from "next/link";
 
