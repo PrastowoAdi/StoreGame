@@ -1,18 +1,21 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 // import Link from "next/link";
 
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { setCheckout } from "../../../services/player";
 
-/* eslint-disable jsx-a11y/label-has-associated-control */
 export default function CheckoutConfirmation() {
   const [checkbox, setCheckBox] = useState(false);
-  const onSubmit = () => {
+  const router = useRouter();
+  const onSubmit = async () => {
     const dataItemLocal = localStorage.getItem("data-item");
     const dataTopUpLocal = localStorage.getItem("data-topup");
 
     const dataItem = JSON.parse(dataItemLocal!);
     const dataTopUp = JSON.parse(dataTopUpLocal!);
-    // console.log("submit", checkbox);
+
     if (!checkbox) {
       toast.error("Patikan anda telah melakukan pembayaran");
     }
@@ -23,9 +26,17 @@ export default function CheckoutConfirmation() {
       payment: dataTopUp.paymentItem.payment._id,
       bank: dataTopUp.paymentItem.bank._id,
       name: dataTopUp.bankAccountName,
-      accoutUser: dataTopUp.verifyID,
+      accountUser: dataTopUp.verifyID,
     };
-    console.log(data);
+
+    const response = await setCheckout(data);
+
+    if (response.error) {
+      toast.error(response.message);
+    } else {
+      toast.success("Checkout Berhasil");
+      router.push("/complete-checkout");
+    }
   };
   return (
     <>
