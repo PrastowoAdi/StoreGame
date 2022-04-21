@@ -44,3 +44,13 @@ export async function setCheckout(data: CheckoutTypes) {
     token: true,
   });
 }
+
+export async function getMemberOverview() {
+  const url = "http://localhost:4000/api/v1/players/dashboard";
+
+  return callAPI({
+    url,
+    method: "GET",
+    token: true,
+  });
+}
