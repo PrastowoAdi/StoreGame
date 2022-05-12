@@ -46,7 +46,7 @@ export async function setCheckout(data: CheckoutTypes) {
 }
 
 export async function getMemberOverview() {
-  const url = "http://localhost:4000/api/v1/players/dashboard";
+  const url = `${ROOT_API}/${API_VERSION}/players/dashboard`;
 
   return callAPI({
     url,

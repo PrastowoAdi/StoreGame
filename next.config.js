@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["mernstack-storegg.herokuapp.com"],
+    domains: ["mernserver-game.herokuapp.com"],
   },
 };
 

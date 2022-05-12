@@ -6,7 +6,7 @@ interface TableRowProps {
     category: string;
     item: string;
     price: number;
-    status: "pending" | "Success" | "Failed" ;
+    status: string;
     image: string;
 }
 export default function TableRow(props: TableRowProps) {
@@ -17,8 +17,8 @@ export default function TableRow(props: TableRowProps) {
   const statusClass = classNames({
     "float-start icon-status": true,
     pending: status === "pending",
-    success: status === "Success",
-    failed: status === "Failed",
+    success: status === "success",
+    failed: status === "failed",
   });
   return (
     <tr className="align-middle">
