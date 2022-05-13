@@ -2,11 +2,8 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/alt-text */
 
-import jwtDecode from "jwt-decode";
-
 import Sidebar from "../../../components/organism/Sidebar";
 import TransactionContent from "../../../components/organism/TransactionContent";
-import { JwtPayloadTypes, UserTypes } from "../../../services/data-types";
 
 export default function Transactions() {
   return (
@@ -36,15 +33,7 @@ export async function getServerSideProps({ req }: GetServerSideProps) {
     };
   }
 
-  const jwtToken = Buffer.from(token, "base64").toString("ascii");
-  const payload: JwtPayloadTypes = jwtDecode(jwtToken);
-  const userFromPayload: UserTypes = payload.player;
-  const IMG = process.env.NEXT_PUBLIC_IMG;
-  userFromPayload.avatar = `${IMG}/${userFromPayload.avatar}`;
-
   return {
-    props: {
-      user: userFromPayload,
-    },
+    props: {},
   };
 }
