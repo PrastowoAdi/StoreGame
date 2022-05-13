@@ -3,8 +3,11 @@
 import jwtDecode from "jwt-decode";
 import TransactionDetailContent from "../../../components/organism/TransactionDetailContent";
 import { JwtPayloadTypes, UserTypes } from "../../../services/data-types";
+import { getMemberTransactionsDetail } from "../../../services/member";
 
-export default function TransactionsDetail() {
+export default function TransactionsDetail(transactionDetail) {
+  console.log("detail: ", transactionDetail);
+
   return (
     <section className="transactions-detail overflow-auto">
       <TransactionDetailContent />
@@ -17,10 +20,14 @@ interface GetServerSideProps {
     cookies: {
       token: string
     }
+  },
+  params: {
+    idTrx: string
   }
 }
 
-export async function getServerSideProps({ req }: GetServerSideProps) {
+export async function getServerSideProps({ req, params }: GetServerSideProps) {
+  const { idTrx } = params;
   const { token } = req.cookies;
   if (!token) {
     return {
@@ -36,10 +43,11 @@ export async function getServerSideProps({ req }: GetServerSideProps) {
   const userFromPayload: UserTypes = payload.player;
   const IMG = process.env.NEXT_PUBLIC_IMG;
   userFromPayload.avatar = `${IMG}/${userFromPayload.avatar}`;
+  const response = await getMemberTransactionsDetail(idTrx, jwtToken);
 
   return {
     props: {
-      user: userFromPayload,
+      transactionDetail: response.data,
     },
   };
 }
