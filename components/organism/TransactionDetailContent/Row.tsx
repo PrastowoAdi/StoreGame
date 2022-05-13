@@ -1,3 +1,5 @@
+import NumberFormat from "react-number-format";
+
 /* eslint-disable react/require-default-props */
 interface RowProps {
     label: string;
@@ -13,7 +15,17 @@ export default function Row(props: RowProps) {
       <span
         className={`purchase-details ${className}`}
       >
-        {value}
+        {typeof value === "number" ? (
+          <NumberFormat
+            value={value}
+            prefix="Rp. "
+            displayType="text"
+            thousandSeparator="."
+            decimalSeparator=","
+          />
+        ) : (
+          value
+        )}
       </span>
     </p>
   );

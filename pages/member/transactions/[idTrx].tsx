@@ -2,15 +2,17 @@
 /* eslint-disable import/extensions */
 import jwtDecode from "jwt-decode";
 import TransactionDetailContent from "../../../components/organism/TransactionDetailContent";
-import { JwtPayloadTypes, UserTypes } from "../../../services/data-types";
+import { HistoryTransactionTypes, JwtPayloadTypes, UserTypes } from "../../../services/data-types";
 import { getMemberTransactionsDetail } from "../../../services/member";
 
-export default function TransactionsDetail(transactionDetail) {
-  console.log("detail: ", transactionDetail);
-
+interface TransactionsDetailProps {
+  transactionDetail: HistoryTransactionTypes;
+}
+export default function TransactionsDetail(props: TransactionsDetailProps) {
+  const { transactionDetail } = props;
   return (
     <section className="transactions-detail overflow-auto">
-      <TransactionDetailContent />
+      <TransactionDetailContent data={transactionDetail} />
     </section>
   );
 }
