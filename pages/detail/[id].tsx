@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 
+import { useEffect } from "react";
 import Footer from "../../components/organism/Footer";
 import Navbar from "../../components/organism/Navbar";
 import TopUpForm from "../../components/organism/TopUpForm";
@@ -14,6 +15,9 @@ interface DetailProps {
   payments: PaymentTypes[];
 }
 export default function Detail({ dataItem, nominals, payments } :DetailProps) {
+  useEffect(() => {
+    localStorage.setItem("data-item", JSON.stringify(dataItem));
+  }, []);
   return (
     <>
       <Navbar />

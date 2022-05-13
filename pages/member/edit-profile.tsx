@@ -16,14 +16,20 @@ import Sidebar from "../../components/organism/Sidebar";
 import { JwtPayloadTypes, UserTypes } from "../../services/data-types";
 import { updateProfile } from "../../services/member";
 
+interface UserStateTypes {
+  id: string;
+  name: string;
+  email: string;
+  avatar: any;
+}
 export default function EditProfile() {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<UserStateTypes>({
     name: "",
     email: "",
     avatar: "",
     id: "",
   });
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState("/");
   const router = useRouter();
 
   useEffect(() => {
@@ -37,7 +43,6 @@ export default function EditProfile() {
   }, []);
 
   const onSubmit = async () => {
-    console.log("user: ", user);
     const data = new FormData();
 
     data.append("image", user.avatar);
@@ -65,10 +70,10 @@ export default function EditProfile() {
               <div className="photo d-flex">
                 <div className="image-upload">
                   <label htmlFor="avatar">
-                    {imagePreview ? (
-                      <img src={imagePreview} alt="upload_img" width={90} height={90} style={{ borderRadius: "100%" }} />
-                    ) : (
+                    {imagePreview === "/" ? (
                       <img src={`${IMG}/${user.avatar}`} alt="upload_img" width={90} height={90} style={{ borderRadius: "100%" }} />
+                    ) : (
+                      <img src={imagePreview} alt="upload_img" width={90} height={90} style={{ borderRadius: "100%" }} />
                     )}
                   </label>
                   <input
@@ -77,7 +82,7 @@ export default function EditProfile() {
                     name="avatar"
                     accept="image/png, image/jpeg"
                     onChange={(event) => {
-                      const img = event.target.files[0];
+                      const img = event.target.files![0];
                       setImagePreview(URL.createObjectURL(img));
                       return setUser({
                         ...user,

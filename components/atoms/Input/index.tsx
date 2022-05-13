@@ -1,7 +1,9 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-export interface InputProps {
+import { InputHTMLAttributes } from "react";
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
 }
 export default function Input(props:InputProps) {

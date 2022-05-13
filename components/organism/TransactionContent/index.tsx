@@ -19,8 +19,6 @@ export default function TransactionContent() {
     if (response.error) {
       toast.error(response.message);
     } else {
-      console.log("res", response);
-
       setTotal(response.data.total);
       setTransactions(response.data.history);
     }
@@ -30,7 +28,7 @@ export default function TransactionContent() {
     getMemberTransactionAPI("all");
   }, []);
 
-  const onTabClick = (value) => {
+  const onTabClick = (value: string) => {
     setTab(value);
     getMemberTransactionAPI(value);
   };

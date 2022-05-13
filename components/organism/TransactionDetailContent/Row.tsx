@@ -3,7 +3,7 @@ import NumberFormat from "react-number-format";
 /* eslint-disable react/require-default-props */
 interface RowProps {
     label: string;
-    value: string;
+    value: string|number;
     className?:string;
 }
 export default function Row(props: RowProps) {
